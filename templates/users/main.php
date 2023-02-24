@@ -4,17 +4,26 @@
  */
 $users = \MyProject\Models\Users\User::findAll();
 ?>
-<?php if ($user->isAdmin()): {?>
+<body>
+<div class="userContent">
+    <h1>Users List</h1>
+    <ul>
+<?php if ($user->isAdmin()):?>
     <?php foreach ($users as $user1): ?>
-        <h2><?= $user1->getNickname() ?></h2>
-        <p><?= $user1->getEmail() ?></p>
-        <p><?= $user1->getRole() ?></p>
-    <?php if ($user!==null && $user->isAdmin()):?>
-        <p><a href="/users/<?= $user1->getId() ?>/edit">Edit</a></p>
-        <p><a href="/users/<?= $user1->getId() ?>/delete">Delete</a></p>
-        <hr color="darkgreen">
-    <?php endif;?>
-    <?php endforeach;?>
-<?php } ?>
-<?php endif;?>
+        <li>
+            <img src="https://via.placeholder.com/150">
+            <h2>Nickname: <?= $user1->getNickname() ?></h2>
+            <p>Email: <?= $user1->getEmail() ?></p>
+            <p>Role: <?= $user1->getRole() ?></p>
+            <p>Created: <?= $user1->getDate()?></p>
+            <?php if ($user!==null && $user->isAdmin()):?>
+                <p><a href="/users/<?= $user1->getId() ?>/edit" class="edit">Edit</a></p>
+                <p><a href="/users/<?= $user1->getId() ?>/delete" class="delete">Delete</a></p>
+            <?php endif;?>
+        </li>
+        <?php endforeach;?>
+        <?php endif;?>
+    </ul>
+</div>
+</body>
 <?php include __DIR__ . '/../footer.php'; ?>
