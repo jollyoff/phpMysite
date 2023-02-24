@@ -1,3 +1,4 @@
+
 <?php include __DIR__ . '/../header.php';
 /**
  * @var \MyProject\Models\Articles\Article $articles
