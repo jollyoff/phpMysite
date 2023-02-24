@@ -96,7 +96,7 @@ class User extends ActiveRecordEntity
             throw new InvalidArgumentException('Пароль должен быть не менее 8 символов');
         }
         if ($userData['password'] != $userData['passwordconf']) {
-            throw new \http\Exception\InvalidArgumentException('Пароли не сходятся');
+            throw new InvalidArgumentException('Пароли не сходятся');
         }
         if (static::findOneByColumn('nickname', $userData['nickname']) !== null) {
             throw new InvalidArgumentException('Пользователь с таким nickname уже существует');
@@ -172,6 +172,11 @@ class User extends ActiveRecordEntity
     public function isAdmin(): bool
     {
         return $this->role === 'admin';
+    }
+
+    public function getDate(): string
+    {
+        return $this->createdAt;
     }
 
     public function refreshAuthToken()
