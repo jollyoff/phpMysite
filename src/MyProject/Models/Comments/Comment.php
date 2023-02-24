@@ -15,6 +15,7 @@ class Comment extends ActiveRecordEntity
 
     protected int $articleId;
 
+
     protected string|null $createdAt = null;
 
     public function getText(): string
@@ -60,9 +61,14 @@ class Comment extends ActiveRecordEntity
         return User::getById($this->authorId);
     }
 
+    public function getArticleId() : int
+    {
+        return $this->articleId;
+    }
+
     public function getArticle(Article $article): Article
     {
-        return Article::getById($this->articleId);
+        return $article->getById($this->articleId);
     }
 
     public function setArticle(Article $article): self
