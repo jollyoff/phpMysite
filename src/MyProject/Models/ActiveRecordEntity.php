@@ -2,6 +2,7 @@
 
 namespace MyProject\Models;
 
+use MyProject\Models\Articles\Article;
 use MyProject\Services\Db;
 
 abstract class ActiveRecordEntity
@@ -136,7 +137,6 @@ abstract class ActiveRecordEntity
         }
 
     }
-
     public function delete(): void
     {
         $db = Db::getInstance();
@@ -159,6 +159,18 @@ abstract class ActiveRecordEntity
             return null;
         }
         return $result[0];
+    }
+
+    public function getNumberComments (Article $article)
+    {
+        $db = Db::getInstance();
+        $result = [];
+        $res = $db->query(
+            'SELECT COUNT(*) FROM `comments` WHERE `article_id` =' . $article->getId() . ';',
+            $result,
+            static::class
+        );
+        return $res;
     }
 
     public static function findByColumn(string $columnName, $value): array
